@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.vityuk.ginger.provider;
 
 import com.vityuk.ginger.LocaleResolver;
@@ -44,6 +43,7 @@ import static com.vityuk.ginger.util.Preconditions.checkNotNull;
  * @author Andriy Vityuk
  */
 public class DefaultLocalizationProvider implements LocalizationProvider {
+
     public static final char LOCALE_SEPARATOR = '_';
     public static final char FILE_EXTENSION_SEPARATOR = '.';
 
@@ -148,6 +148,15 @@ public class DefaultLocalizationProvider implements LocalizationProvider {
         if (messageFormat == null && !isEmptySelector(selector)) {
             // Fallback to message without selector
             messageFormat = getMessageFormat(locale, key, EMPTY_SELECTOR);
+        }
+        // Should not use recursive because it can cause infinite loop.
+        if (messageFormat == null && !locale.equals(localeResolver.getFallbackLocale())) {
+            locale = localeResolver.getFallbackLocale();
+            messageFormat = getMessageFormat(locale, key, selector);
+            if (messageFormat == null && !isEmptySelector(selector)) {
+                // Fallback to message without selector
+                messageFormat = getMessageFormat(locale, key, EMPTY_SELECTOR);
+            }
         }
         return messageFormat;
     }
@@ -301,7 +310,7 @@ public class DefaultLocalizationProvider implements LocalizationProvider {
     }
 
     private static LoadingCache<MessageKey, MessageFormat> createMessageFormatCache(Builder builder,
-                                                                                              CacheLoader<MessageKey, MessageFormat> cacheLoader) {
+            CacheLoader<MessageKey, MessageFormat> cacheLoader) {
         if (builder.maxCacheTimeInSec == -1) {
             return ThreadLocalLoadingCache.create(cacheLoader);
         } else {
@@ -310,7 +319,7 @@ public class DefaultLocalizationProvider implements LocalizationProvider {
     }
 
     private static LoadingCache<Locale, PropertyResolver> createPropertyResolverCache(Builder builder,
-                                                                                      CacheLoader<Locale, PropertyResolver> cacheLoader) {
+            CacheLoader<Locale, PropertyResolver> cacheLoader) {
         CacheBuilder<Object, Object> cacheBuilder = new CacheBuilder<Object, Object>();
         if (builder.maxCacheTimeInSec >= 0) {
             cacheBuilder.expireAfterWrite(builder.maxCacheTimeInSec, TimeUnit.SECONDS);
@@ -368,6 +377,7 @@ public class DefaultLocalizationProvider implements LocalizationProvider {
     }
 
     public static class Builder {
+
         private LocaleResolver localeResolver;
         private ResourceLoader resourceLoader;
         private LocalizationLoader localizationLoader;
@@ -417,6 +427,7 @@ public class DefaultLocalizationProvider implements LocalizationProvider {
     }
 
     private static final class MessageKey {
+
         private final Locale locale;
         private final String key;
         private final String selector;
@@ -429,7 +440,7 @@ public class DefaultLocalizationProvider implements LocalizationProvider {
 
         @Override
         public int hashCode() {
-            return Arrays.hashCode(new Object[] {key, selector, locale});
+            return Arrays.hashCode(new Object[]{key, selector, locale});
         }
 
         @Override
@@ -442,8 +453,8 @@ public class DefaultLocalizationProvider implements LocalizationProvider {
             }
 
             MessageKey that = (MessageKey) o;
-            return MiscUtils.equal(key, that.key) && MiscUtils.equal(selector, selector) &&
-                    MiscUtils.equal(locale, that.locale);
+            return MiscUtils.equal(key, that.key) && MiscUtils.equal(selector, selector)
+                    && MiscUtils.equal(locale, that.locale);
         }
 
         public Locale getLocale() {

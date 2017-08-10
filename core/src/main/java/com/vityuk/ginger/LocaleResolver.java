@@ -13,22 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.vityuk.ginger;
 
 import java.util.Locale;
+import java.util.function.Supplier;
 
 /**
  * Implementations responsible for resolving current {@link Locale}.
  *
- * For example, desktop application might get it just from {@link java.util.Locale#getDefault()}.
- * In contrast web application might need to get it from current request context.
+ * For example, desktop application might get it just from
+ * {@link java.util.Locale#getDefault()}. In contrast web application might need
+ * to get it from current request context.
  */
 public interface LocaleResolver {
+
     /**
      * Resolve current {@code Locale}.
      *
      * @return resolved locale or default value, must never return {@code null}
      */
     Locale getLocale();
+
+    default Locale getFallbackLocale() {
+        return getLocale();
+    }
+
+    static LocaleResolver of(Supplier<Locale> localeSupplier, Supplier<Locale> fallbackLocaleSupplier) {
+        return new LocaleResolver() {
+            @Override
+            public Locale getLocale() {
+                return localeSupplier.get();
+            }
+
+            @Override
+            public Locale getFallbackLocale() {
+                return fallbackLocaleSupplier.get();
+            }
+
+        };
+    }
 }
