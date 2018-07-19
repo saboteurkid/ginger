@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright 2013 Andriy Vityuk
+  ~ Copyright 2013 Andriy liemlhd
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -19,8 +19,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>ginger-parent</artifactId>
-        <groupId>com.vityuk</groupId>
-        <version>0.3.0-liemlhd</version>
+        <groupId>com.liemlhd</groupId>
+        <version>0.3.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -34,9 +34,9 @@
             <version>2.6</version>
         </dependency>
         <dependency>
-            <groupId>com.vityuk</groupId>
+            <groupId>com.liemlhd</groupId>
             <artifactId>ginger-core</artifactId>
-            <version>0.3.0-SNAPSHOT</version>
+            <version>0.3.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

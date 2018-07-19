@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2013 Andriy Vityuk
+  ~ Copyright 2013 Andriy liemlhd
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.vityuk</groupId>
+		<groupId>com.liemlhd</groupId>
 		<artifactId>ginger-parent</artifactId>
-        <version>0.3.0-liemlhd</version>
+        <version>0.3.0</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 

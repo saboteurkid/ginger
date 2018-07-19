@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright 2013 Andriy Vityuk
+  ~ Copyright 2013 Andriy liemlhd
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@
     <description>ginger JSP Tag Library</description>
     <tlib-version>0.1</tlib-version>
     <short-name>ginger</short-name>
-    <uri>http://github.com/avityuk/ginger</uri>
+    <uri>http://github.com/aliemlhd/ginger</uri>
 
     <tag>
         <description>
@@ -37,7 +37,7 @@
             (i.e. by HtmlEscapeTag or a "defaultHtmlEscape" context-param in web.xml).
         </description>
         <name>message</name>
-        <tag-class>com.vityuk.ginger.servlet.tags.MessageTag</tag-class>
+        <tag-class>com.liemlhd.ginger.servlet.tags.MessageTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>

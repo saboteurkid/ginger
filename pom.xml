@@ -1,5 +1,5 @@
 <!--
-~ Copyright 2013 Andriy Vityuk
+~ Copyright 2013 Andriy liemlhd
 ~
 ~ Licensed under the Apache License, Version 2.0 (the "License");
 ~ you may not use this file except in compliance with the License.
@@ -14,7 +14,8 @@
 ~ limitations under the License.
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -23,20 +24,17 @@
         <version>7</version>
     </parent>
 
-    <groupId>com.vityuk</groupId>
+    <groupId>com.liemlhd</groupId>
     <artifactId>ginger-parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.3.0-liemlhd</version>
+    <version>0.3.0</version>
     <name>ginger parent</name>
-    <description>Simple type-safe i18n library</description>
-    <url>https://github.com/avityuk/ginger</url>
 
     <modules>
         <module>core</module>
         <module>servlet</module>
         <module>spring</module>
         <module>generator</module>
-        <module>maven</module>
     </modules>
 
     <properties>
@@ -62,18 +60,6 @@
         <mockito.version>1.9.5</mockito.version>
         <fest.version>2.0M8</fest.version>
     </properties>
-
-    <scm>
-        <connection>scm:git:git://github.com/avityuk/ginger.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/avityuk/ginger.git</developerConnection>
-        <url>git@github.com:avityuk/ginger.git</url>
-        <tag>HEAD</tag>
-    </scm>
-
-    <issueManagement>
-        <system>GitHub Issues</system>
-        <url>http://github.com/avityuk/ginger/issues</url>
-    </issueManagement>
 
     <licenses>
         <license>
@@ -151,7 +137,9 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.0</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -163,7 +151,9 @@
                 </executions>
             </plugin>
             <plugin>
+
                 <artifactId>maven-javadoc-plugin</artifactId>
+
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -187,20 +177,20 @@
                     </execution>
                 </executions>
             </plugin>
-<!--            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.6</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
+            <!--            <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-gpg-plugin</artifactId>
+                            <version>1.6</version>
+                            <executions>
+                                <execution>
+                                    <id>sign-artifacts</id>
+                                    <phase>verify</phase>
+                                    <goals>
+                                        <goal>sign</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>-->
 
             <!--<plugin>-->
             <!--<groupId>org.apache.maven.plugins</groupId>-->
@@ -222,4 +212,11 @@
             <!--</plugin>-->
         </plugins>
     </build>
+    <distributionManagement>
+        <repository>
+            <id>360live-artifactory</id>
+            <name>UP_ZPHO_Storage-56.199-releases</name>
+            <url>http://dev3.me.zing.vn/artifactory/libs-server-local</url>
+        </repository>
+    </distributionManagement>
 </project>
