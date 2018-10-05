@@ -27,14 +27,11 @@
     <groupId>com.liemlhd</groupId>
     <artifactId>ginger-parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.3.0</version>
+    <version>0.3.2</version>
     <name>ginger parent</name>
 
     <modules>
         <module>core</module>
-        <module>servlet</module>
-        <module>spring</module>
-        <module>generator</module>
     </modules>
 
     <properties>

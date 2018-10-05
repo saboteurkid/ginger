@@ -22,4 +22,6 @@ public interface LoadingCache<K, V> {
 
     V get(K key) throws ExecutionException;
     V getUnchecked(K key);
+    V invalidate(K key);
+    void refresh();
 }

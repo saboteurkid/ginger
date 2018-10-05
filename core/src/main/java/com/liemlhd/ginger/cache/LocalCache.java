@@ -57,5 +57,21 @@ public class LocalCache {
                 return v.getValue();
             }
         }
+
+        @Override
+        public V invalidate(K key) {
+            ExpireableValue<V> v = null;
+            synchronized(map){
+                v = map.remove(key);
+            }
+            return v == null ? null : v.getValue();
+        }
+
+        @Override
+        public void refresh() {
+            synchronized(map){
+                map.clear();
+            }
+        }
     }
 }

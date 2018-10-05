@@ -75,6 +75,20 @@ public abstract class ThreadLocalLoadingCache<K, V> extends AbstractLoadingCache
         this.cacheLoader = checkNotNull(cacheLoader);
     }
 
+    @Override
+    public final void refresh() {
+        Map map = threadLocalCache.get();
+        synchronized(map){
+            map.clear();
+        }
+    }
+
+    @Override
+    public V invalidate(K key) {
+        return invalidate(getCache(), key);
+    }
+    protected abstract V invalidate(Map<K, Object> cache, K key);
+
     protected abstract void storeInCache(Map<K, Object> cache, K key, V value);
 
     protected abstract V getFromCache(Map<K, Object> cache, Object key);
@@ -118,6 +132,12 @@ public abstract class ThreadLocalLoadingCache<K, V> extends AbstractLoadingCache
             V value = (V) cache.get(key);
             return value;
         }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected V invalidate(Map<K, Object> cache, K key) {
+            return (V)cache.remove(key);
+        }
     }
 
     private static class ExpireableThreadLocalLoadingCache<K, V> extends ThreadLocalLoadingCache<K, V> {
@@ -147,6 +167,13 @@ public abstract class ThreadLocalLoadingCache<K, V> extends AbstractLoadingCache
             }
 
             return expireableValue.getValue();
+        }
+
+        @Override
+        protected V invalidate(Map<K, Object> cache, K key) {
+            @SuppressWarnings("unchecked")
+            ExpireableValue<V> expireableValue = (ExpireableValue<V>) cache.remove(key);
+            return expireableValue == null ? null : expireableValue.getValue();
         }
     }
 
